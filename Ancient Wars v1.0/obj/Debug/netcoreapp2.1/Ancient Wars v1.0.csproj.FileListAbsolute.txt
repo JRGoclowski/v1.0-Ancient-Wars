@@ -1,0 +1,11 @@
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.csprojAssemblyReference.cache
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.csproj.CoreCompileInputs.cache
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.AssemblyInfoInputs.cache
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.AssemblyInfo.cs
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\bin\Debug\netcoreapp2.1\Ancient Wars v1.0.deps.json
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\bin\Debug\netcoreapp2.1\Ancient Wars v1.0.runtimeconfig.json
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\bin\Debug\netcoreapp2.1\Ancient Wars v1.0.runtimeconfig.dev.json
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\bin\Debug\netcoreapp2.1\Ancient Wars v1.0.dll
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\bin\Debug\netcoreapp2.1\Ancient Wars v1.0.pdb
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.dll
+C:\Users\Jonathan\Documents\GitHub\Ancient Wars\Ancient Wars v1.0\obj\Debug\netcoreapp2.1\Ancient Wars v1.0.pdb
