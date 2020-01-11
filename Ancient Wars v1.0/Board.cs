@@ -142,13 +142,13 @@ namespace Ancient_Wars_v1._0
 
 
         }
-        public Board(int xDimension, int yDimension)
+        public Board(int rowDimension, int colDimension)
         {
 
-            ConstructGrid(xDimension, yDimension);
+            ConstructGrid(rowDimension, colDimension);
             mDimensionArray = new int[2];
-            mDimensionArray[0] = xDimension;
-            mDimensionArray[1] = yDimension;
+            mDimensionArray[0] = rowDimension;
+            mDimensionArray[1] = colDimension;
 
         }
 
@@ -156,15 +156,15 @@ namespace Ancient_Wars_v1._0
         static private List<List<BoardSpace>> mGridArray;
         private int[] mDimensionArray;
 
-        private void ConstructGrid(int xArg, int yArg)
+        private void ConstructGrid(int rowArg, int colArg)
         {
             List<List<BoardSpace>> lGrid = new List<List<BoardSpace>>();
-            for (int i = 0; i < xArg; i++)
+            for (int i = 0; i < rowArg; i++)                                
             {
                 List<BoardSpace> lRowList = new List<BoardSpace>();
-                for (int j = 0; j < yArg; j++)
+                for (int j = 0; j < colArg; j++)
                 {
-                    lRowList.Add(new BoardSpace(new SpaceCoordinate (xArg, yArg)));
+                    lRowList.Add(new BoardSpace(new SpaceCoordinate (i, j)));
                 }
                 lGrid.Add(lRowList);
             }
@@ -181,9 +181,9 @@ namespace Ancient_Wars_v1._0
             GetBoardSpace(coordArg.XCoordinate, coordArg.YCoordinate).SetNewPieceValue(pieceArg);
         }
 
-        public char GetSpaceIcon(int xArg, int yArg)
+        public char GetSpaceIcon(int rowArg, int colArg)
         {
-            return GetBoardSpace(xArg, yArg).Icon;
+            return GetBoardSpace(rowArg, colArg).Icon;
         }
 
         public List<SpaceCoordinate> GetOccupiedCoords()
@@ -197,7 +197,7 @@ namespace Ancient_Wars_v1._0
             return occSpaceCoords;
         }        
 
-        private BoardSpace GetBoardSpace(int xArg, int yArg) => mGridArray[xArg][yArg];
+        private BoardSpace GetBoardSpace(int rowArg, int colArg) => mGridArray[rowArg][colArg];
 
         private List<SpaceCoordinate> GetOccupiedCoordsFromBoard()
         {
@@ -216,16 +216,24 @@ namespace Ancient_Wars_v1._0
         }
 
         public bool withinBounds(SpaceCoordinate coordArg)
-        { 
+        {
+            bool xInBounds = false, yInBounds = false;
             if (coordArg.XCoordinate > 0 && coordArg.XCoordinate < this.mDimensionArray[0])
             {
-                if (coordArg.YCoordinate > 0 && coordArg.YCoordinate < this.mDimensionArray[1])
-                {
-                    return true;
-                }
+                xInBounds = true;
             }
-            return false;
+            if (coordArg.YCoordinate > 0 && coordArg.YCoordinate < this.mDimensionArray[1])
+            {
+                yInBounds = true;
+            }
+            return (xInBounds && yInBounds);
         }
+
+        public bool SpaceWalkable(SpaceCoordinate coordArg)
+        {
+            return GetBoardSpace(coordArg.XCoordinate, coordArg.YCoordinate).isWalkable;
+        }
+
         public int[] Dimensions
         {
             get { return mDimensionArray; }

@@ -6,6 +6,29 @@ namespace Ancient_Wars_v1._0
 {
     class Token
     {
+        public Token()
+        {
+            mNameString = "DefName";
+            mIconChar = 'N';
+            mTokenID = new TokenId();
+        }
+
+        public Token(string nameArg, char iconArg)
+        {
+            mNameString = nameArg;
+            mIconChar = iconArg;
+            mTokenID = new TokenId();
+        }
+
+        private string mNameString;
+
+        public string Name
+        {
+            get { return mNameString; }
+            private set { mNameString = value; }
+        }
+
+
         private char mIconChar;
         public char Icon
         {
@@ -13,26 +36,35 @@ namespace Ancient_Wars_v1._0
              set { mIconChar = value; }
         }
 
-        private static int counterID = 0;
-        private class TokenId
+        private TokenId mTokenID;
+
+        public TokenId TokenID
         {
+            get { return mTokenID; }
+            set { mTokenID = value; }
+        }
+
+        public class TokenId
+        {
+            private static int counterID = 0;
+            
             public TokenId()
             {
-                IDnumber = counterID;
+                mIDNumberInt = counterID;
                 counterID++;
                 IDChar = 'N';
-                IDstring = IDChar + IDnumber.ToString();
+                IDstring = IDChar + mIDNumberInt.ToString();
             }
 
             public TokenId(char charArg)
             {
-                IDnumber = counterID;
+                mIDNumberInt = counterID;
                 counterID++;
                 IDChar = charArg;
-                IDstring = IDChar + IDnumber.ToString();
+                IDstring = IDChar + mIDNumberInt.ToString();
             }
 
-            private string IDstring
+            public string IDstring
             {
                 get
                 {
@@ -44,29 +76,21 @@ namespace Ancient_Wars_v1._0
                 }
             }
 
-            private char IDChar
+            private char mIDChar;
+
+            public char IDChar
             {
-                get
-                {
-                    return IDChar;
-                }
-                set
-                {
-                    IDChar = value;
-                }
+                get { return mIDChar; }
+                set { mIDChar = value; }
             }
 
-            private static int IDnumber
-            {
-                get
-                {
-                    return IDnumber;
-                }
-                set
-                {
-                    IDnumber = value;
-                }
 
+            private int mIDNumberInt;
+
+            public int IDNumber
+            {
+                get { return mIDNumberInt; }
+                set { mIDNumberInt = value; }
             }
         }
     }

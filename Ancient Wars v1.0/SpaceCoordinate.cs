@@ -7,13 +7,21 @@ namespace Ancient_Wars_v1._0
 {
     public class SpaceCoordinate
     {
-
-        public SpaceCoordinate(int xArg, int yArg)
+        public SpaceCoordinate()
         {
 
-            mXCoordinateInt = xArg;
+            mXCoordinateInt = 0;
 
-            mYCoordinateInt = yArg;
+            mYCoordinateInt = 0;
+
+        }
+
+        public SpaceCoordinate(int rowArg, int colArg)
+        {
+
+            mXCoordinateInt = rowArg;
+
+            mYCoordinateInt = colArg;
 
         }
 

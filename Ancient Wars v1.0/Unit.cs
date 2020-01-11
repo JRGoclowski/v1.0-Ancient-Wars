@@ -7,22 +7,19 @@ namespace Ancient_Wars_v1._0
     class Unit : Token
     {
 
-        public Unit()
+        public Unit() : base()
         {
             mBaseSpeed = 3;
             mBaseHealth = 5;
             mBaseAttack = 2;
-            base.Icon = 'T';
             SetToBaseValues();
         }
 
-        public Unit(string nameArg, int speedArg, int healthArg, int attackArg, char iconArg)
+        public Unit(string nameArg, int speedArg, int healthArg, int attackArg, char iconArg): base(nameArg, iconArg)
         {
-            mNameString = nameArg;
             mBaseSpeed = speedArg;
             mBaseHealth = healthArg;
-            mBaseAttack = attackArg;
-            base.Icon = iconArg;
+            mBaseAttack = attackArg;            
             SetToBaseValues();
         }
 
@@ -101,16 +98,5 @@ namespace Ancient_Wars_v1._0
             get { return mAliveBool; }
             private set { mAliveBool = value; }
         }
-
-        private string mNameString;
-
-        public string Name
-        {
-            get { return mNameString; }
-            set { mNameString = value; }
-        }
-
-        
-
     }
 }

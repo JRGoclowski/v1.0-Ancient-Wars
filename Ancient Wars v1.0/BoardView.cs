@@ -27,22 +27,22 @@ namespace Ancient_Wars_v1._0
             {
                 for (int j = 0; j < mBoardVar.Dimensions[1] + 1; j++)
                 {
-                    if (i == 0)
+                    if (j == 0)
                     {
-                        if (j == 0)
+                        if (i == 0)
                         {
                             boardBuilder.Append(" ");
                         }
                         else
                         {
-                            boardBuilder.Append(j-1);
+                            boardBuilder.Append(i - 1);
                         }                        
                     }
                     else
                     {
-                        if (j == 0)
+                        if (i == 0)
                         {
-                            boardBuilder.Append(i-1);
+                            boardBuilder.Append(j - 1);
                         }
                         else
                         {

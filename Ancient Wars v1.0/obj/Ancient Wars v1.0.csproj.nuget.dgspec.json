@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jonathan\\Documents\\GitHub\\Ancient Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj": {}
+    "C:\\Users\\Jonathan\\Documents\\GitHub\\v1.0-Ancient-Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jonathan\\Documents\\GitHub\\Ancient Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj": {
+    "C:\\Users\\Jonathan\\Documents\\GitHub\\v1.0-Ancient-Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jonathan\\Documents\\GitHub\\Ancient Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj",
+        "projectUniqueName": "C:\\Users\\Jonathan\\Documents\\GitHub\\v1.0-Ancient-Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj",
         "projectName": "Ancient Wars v1.0",
-        "projectPath": "C:\\Users\\Jonathan\\Documents\\GitHub\\Ancient Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj",
+        "projectPath": "C:\\Users\\Jonathan\\Documents\\GitHub\\v1.0-Ancient-Wars\\Ancient Wars v1.0\\Ancient Wars v1.0.csproj",
         "packagesPath": "C:\\Users\\Jonathan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jonathan\\Documents\\GitHub\\Ancient Wars\\Ancient Wars v1.0\\obj\\",
+        "outputPath": "C:\\Users\\Jonathan\\Documents\\GitHub\\v1.0-Ancient-Wars\\Ancient Wars v1.0\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",

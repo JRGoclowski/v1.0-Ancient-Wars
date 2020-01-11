@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ancient_Wars_v1._0
 {
@@ -9,11 +10,15 @@ namespace Ancient_Wars_v1._0
         static void Main(string[] args)
         {
             Game_Controller main_Controller = new Game_Controller();
+            Console.WriteLine(".");
             BoardView main_BoardView = new BoardView();
+            Console.WriteLine(".");
             main_BoardView.Board = main_Controller.GetBoard();
             bool gameContinue = true;
-            main_Controller.PlaceUnit(Unit.GetBasicUnit(1), 3, 4);
-            main_Controller.PlaceUnit(Unit.GetBasicUnit(0), 4, 3);
+            Console.WriteLine(".");
+            main_Controller.PlaceUnit(Unit.GetBasicUnit(1), 2, 4);
+            main_Controller.PlaceUnit(Unit.GetBasicUnit(0), 3, 5);
+            Console.WriteLine(".");
 
 
 
@@ -91,35 +96,67 @@ namespace Ancient_Wars_v1._0
 
             bool spaceSelected = false;
             string userCoords = "";
-
+            SpaceCoordinate lSpaceCoordinate = new SpaceCoordinate();
 
             while (!spaceSelected)
             {
-                Console.Write("Enter Coordinates [XCoord, YCoord]: ");
+                Console.Write("Enter Coordinates [Row, Column]: ");
                 userCoords = Console.ReadLine();
-                SpaceCoordinate lCoord = SpaceCoordinate.ParseCoordinate(userCoords);
-                if (lCoord != null)
+                lSpaceCoordinate = SpaceCoordinate.ParseCoordinate(userCoords);
+                if (lSpaceCoordinate != null)
                 {
-                    if (contArg.GetBoard().withinBounds(lCoord))
+                    if (contArg.ConfirmValidPlacement(lSpaceCoordinate))
                     {
-                    spaceSelected = true;
+                        spaceSelected = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("That coordinate is not valid for placement");
                     }
                 }                
                 else
                 {
-                    Console.WriteLine("Entered Coordinates were not valid");
+                    Console.WriteLine("Input not a valid Coordinate");
                 }
             }
-
-            contArg.PlaceUnit(Unit.GetBasicUnit(unitInt), userCoords);
+            contArg.PlaceUnit(Unit.GetBasicUnit(unitInt), lSpaceCoordinate);
         }
 
         static private void SelectUnit(Game_Controller contArg)
         {
-            Console.WriteLine("Occupied Spaces: ");
-            foreach(SpaceCoordinate iCoord in contArg.GetBoard().GetOccupiedCoords())
+            Console.WriteLine("Select index of desired unit's space");
+            int userIndexInt = -1;
+            bool selectedUnit = false;
+            while (!selectedUnit)
             {
-                Console.WriteLine("(" + iCoord.XCoordinate + ", " + iCoord.YCoordinate + ")");
+                Console.WriteLine("Occupied Spaces: ");
+                List<SpaceCoordinate> occSpaces = contArg.GetBoard().GetOccupiedCoords();
+                int i = 0;
+
+                foreach (SpaceCoordinate iCoord in occSpaces)
+                {
+                    Console.WriteLine(i.ToString() + " - (" + iCoord.XCoordinate + ", " + iCoord.YCoordinate + ")");
+                    i++;
+                }
+                try
+                {
+                    userIndexInt = Convert.ToInt32(Console.ReadLine());
+                    if (userIndexInt > occSpaces.Count || userIndexInt < 0)
+                    {
+                        Console.WriteLine("Not within bounds");
+                    }
+                    else
+                    {
+                        selectedUnit = true;
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("Not an integer, Please enter an integer.");
+                }
+
+                Token chosenToken = contArg.GetBoard().GetBoardPieceAt(occSpaces[userIndexInt]).Token;
+                Console.WriteLine(chosenToken.Name + " / ID:" + chosenToken.TokenID);
             }
         }
     }

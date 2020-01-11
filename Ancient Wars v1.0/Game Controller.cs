@@ -52,11 +52,19 @@ namespace Ancient_Wars_v1._0
             return mUnitNames[intArg];
         }
 
-        public bool ConfirmValidPlacement(int xArg, int yArg)
+        public bool ConfirmValidPlacement(SpaceCoordinate coordArg)
         {
-            if (mBoardOfPlay.GetOccupiedCoords().Contains({xArg, yArg}))
+            if (mBoardOfPlay.GetOccupiedCoords().Contains(coordArg))
             {
-
+                return false;
+            }
+            if (!mBoardOfPlay.SpaceWalkable(coordArg))
+            {
+                return false;
+            }
+            if (mBoardOfPlay.withinBounds(coordArg))
+            {
+                return false;
             }
             return true;
         }
@@ -64,6 +72,13 @@ namespace Ancient_Wars_v1._0
         {
             BoardPiece placedPiece = new BoardPiece(unitArg);
             mBoardOfPlay.SetBoardPieceAt(placedPiece, coordArg);
+        }
+
+        public void PlaceUnit(Unit unitArg, int rowArg, int colArg)
+        {
+            SpaceCoordinate lSpaceCoordinate = new SpaceCoordinate(rowArg, colArg);
+            BoardPiece placedPiece = new BoardPiece(unitArg);
+            mBoardOfPlay.SetBoardPieceAt(placedPiece, lSpaceCoordinate);
         }
     }
 }
