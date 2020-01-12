@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Ancient_Wars_v1._0
 {
- 
+    
+    //The actual pieces that sit on a board. Used primarily for manipulation in the board context
     class BoardPiece
     {
         public BoardPiece(Token tokenArg)

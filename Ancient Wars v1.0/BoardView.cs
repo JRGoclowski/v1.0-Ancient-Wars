@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Ancient_Wars_v1._0
 {
+    //Faciliates Representation of the board in a UI format
     class BoardView
     {
         private Board mBoardVar;

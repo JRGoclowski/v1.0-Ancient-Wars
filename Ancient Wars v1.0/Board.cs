@@ -10,7 +10,26 @@ namespace Ancient_Wars_v1._0
         //Private contained class boardspace represents each square of the grid
         private class BoardSpace
         {
-            
+            public class SpaceEdge
+            {
+                enum edgeName
+                {
+                    NORTH = 0,
+                    EAST = 1,
+                    SOUTH = 2,
+                    WEST = 3,
+                }
+
+                private int edgeWeight;
+
+                public int MyProperty
+                {
+                    get { return edgeWeight; }
+                    set { edgeWeight = value; }
+                }
+
+
+            }
 
             //Construct a boardspace with x and y coordinates
             public BoardSpace(SpaceCoordinate coordArg)
@@ -18,13 +37,33 @@ namespace Ancient_Wars_v1._0
 
                 mCoordinate = coordArg;
 
+                mNeighborList = new List<BoardSpace>();
             }
 
-            //Construct a boardspace with x and y coordinates, as well as a boardpiece
-            public BoardSpace(SpaceCoordinate coordArg, BoardPiece pieceArg)
+            public BoardSpace(SpaceCoordinate coordArg, bool walkBool, bool aimBool)
             {
 
                 mCoordinate = coordArg;
+
+                mNeighborList = new List<BoardSpace>();
+
+                mWalkableBool = walkBool;
+                mAimThroughBool = aimBool;
+                                
+                mPiecePresentBool = false;
+
+            }
+
+            //Construct a boardspace with x and y coordinates, as well as a boardpiece
+            public BoardSpace(SpaceCoordinate coordArg, BoardPiece pieceArg, bool walkBool, bool aimBool)
+            {
+
+                mCoordinate = coordArg;
+
+                mNeighborList = new List<BoardSpace>();
+
+                mWalkableBool = walkBool;
+                mAimThroughBool = aimBool;
 
                 PieceAt = pieceArg;
                 mPiecePresentBool = true;
@@ -51,6 +90,37 @@ namespace Ancient_Wars_v1._0
                 mPiecePresentBool = false;
             }
 
+            //Returns all "neighbors" to a board space
+            public static List<BoardSpace> IdentifyNeighbors(Board boardArg, BoardSpace spaceArg)
+            {
+
+                List<BoardSpace> lNeighbors = new List<BoardSpace>();
+
+                foreach (SpaceMovement iMove in SpaceMovement.BASIC_DIRECTIONS)
+                {
+                    BoardSpace possNeighbor = spaceArg.SpaceAtMove(iMove);
+                    if (Board.withinBounds(boardArg, possNeighbor.Coordinates))
+                    {
+                        lNeighbors.Add(possNeighbor);
+                    }
+                }
+                return lNeighbors;
+            }
+
+
+
+            public void AddNeighbor(BoardSpace spaceArg)
+            {
+                mNeighborList.Add(spaceArg);
+            }
+
+            private BoardSpace SpaceAtMove(SpaceMovement moveArg)
+            {
+                int newRow = this.Coordinates.RowCoordinate + moveArg.RowMovement;
+                int newCol = this.Coordinates.ColCoordinate + moveArg.ColMovement;
+                BoardSpace lSpace = new BoardSpace(new SpaceCoordinate(newRow, newCol));
+                return lSpace;
+            }
             //=========
             //= Props =
             //=========
@@ -85,6 +155,23 @@ namespace Ancient_Wars_v1._0
                 }
 
             }
+
+            private List<BoardSpace> mNeighborList;
+
+            public List<BoardSpace> Neighbors
+            {
+                get { return mNeighborList; }
+                set { mNeighborList = value; }
+            }
+
+            private BoardNode mBoardNode;
+
+            public BoardNode Node
+            {
+                get { return mBoardNode; }
+                set { mBoardNode = value; }
+            }
+
 
             public char Icon
             {
@@ -139,7 +226,7 @@ namespace Ancient_Wars_v1._0
                 private set { mPiecePresentBool = value; }
             }
 
-
+            
 
         }
         public Board(int rowDimension, int colDimension)
@@ -153,32 +240,44 @@ namespace Ancient_Wars_v1._0
         }
 
         //mGridArray represents the board as a collection of board spaces
-        static private List<List<BoardSpace>> mGridArray;
+        static private List<BoardSpace> mGridArray;
         private int[] mDimensionArray;
 
         private void ConstructGrid(int rowArg, int colArg)
         {
-            List<List<BoardSpace>> lGrid = new List<List<BoardSpace>>();
+            List<BoardSpace> lGrid = new List<BoardSpace>();
             for (int i = 0; i < rowArg; i++)                                
             {
                 List<BoardSpace> lRowList = new List<BoardSpace>();
                 for (int j = 0; j < colArg; j++)
                 {
-                    lRowList.Add(new BoardSpace(new SpaceCoordinate (i, j)));
-                }
-                lGrid.Add(lRowList);
+                    lGrid.Add(new BoardSpace(new SpaceCoordinate(i, j), true, true));
+                }                
             }
             mGridArray = lGrid;
         }
 
+        //Populates the neighbor lists of each boardspace
+        private void AddValidNeighbors()
+        {
+            foreach (BoardSpace iSpace in mGridArray)
+            {
+                foreach(BoardSpace iNeighborSpace in BoardSpace.IdentifyNeighbors(this, iSpace))
+                {
+                    iSpace.AddNeighbor(iNeighborSpace);
+                }
+            }
+        }
+
+        //Returns the boardpiece at a coordinate
         public BoardPiece GetBoardPieceAt(SpaceCoordinate coordArg)
         {
-            return GetBoardSpace(coordArg.XCoordinate, coordArg.YCoordinate).PieceAt;
+            return GetBoardSpace(coordArg.RowCoordinate, coordArg.ColCoordinate).PieceAt;
         }
 
         public void SetBoardPieceAt(BoardPiece pieceArg, SpaceCoordinate coordArg)
         {
-            GetBoardSpace(coordArg.XCoordinate, coordArg.YCoordinate).SetNewPieceValue(pieceArg);
+            GetBoardSpace(coordArg.RowCoordinate, coordArg.ColCoordinate).SetNewPieceValue(pieceArg);
         }
 
         public char GetSpaceIcon(int rowArg, int colArg)
@@ -197,32 +296,42 @@ namespace Ancient_Wars_v1._0
             return occSpaceCoords;
         }        
 
-        private BoardSpace GetBoardSpace(int rowArg, int colArg) => mGridArray[rowArg][colArg];
+        private BoardSpace GetBoardSpace(int rowArg, int colArg)
+        {
+            foreach (BoardSpace iSpace in mGridArray)
+            {
+                if (iSpace.GetCoords().RowCoordinate == rowArg)
+                {
+                    if (iSpace.GetCoords().ColCoordinate == colArg)
+                    {
+                        return iSpace;
+                    }
+                }
+            }
+            return null;
+        }
 
         private List<SpaceCoordinate> GetOccupiedCoordsFromBoard()
         {
             List<SpaceCoordinate> lSpaceList = new List<SpaceCoordinate>();
-            foreach (List<BoardSpace> lList in mGridArray)
-            {
-                foreach (BoardSpace lBoardSpace in lList)
+            foreach (BoardSpace iSpace in mGridArray)
+            {                
+                if (iSpace.hasPiece)
                 {
-                    if (lBoardSpace.hasPiece)
-                    {
-                        lSpaceList.Add(lBoardSpace.Coordinates);
-                    }
+                    lSpaceList.Add(iSpace.Coordinates);
                 }
             }
             return lSpaceList;
         }
 
-        public bool withinBounds(SpaceCoordinate coordArg)
+        public static bool withinBounds(Board boardArg, SpaceCoordinate coordArg)
         {
-            bool xInBounds = false, yInBounds = false;
-            if (coordArg.XCoordinate > 0 && coordArg.XCoordinate < this.mDimensionArray[0])
+            bool xInBounds = false, yInBounds = false;            
+            if (coordArg.RowCoordinate > 0 && coordArg.RowCoordinate < boardArg.mDimensionArray[0])
             {
                 xInBounds = true;
             }
-            if (coordArg.YCoordinate > 0 && coordArg.YCoordinate < this.mDimensionArray[1])
+            if (coordArg.ColCoordinate > 0 && coordArg.ColCoordinate < boardArg.mDimensionArray[1])
             {
                 yInBounds = true;
             }
@@ -231,7 +340,7 @@ namespace Ancient_Wars_v1._0
 
         public bool SpaceWalkable(SpaceCoordinate coordArg)
         {
-            return GetBoardSpace(coordArg.XCoordinate, coordArg.YCoordinate).isWalkable;
+            return GetBoardSpace(coordArg.RowCoordinate, coordArg.ColCoordinate).isWalkable;
         }
 
         public int[] Dimensions

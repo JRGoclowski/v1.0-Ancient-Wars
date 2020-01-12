@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Ancient_Wars_v1._0
 {
-    class Token
+    //Base class for any object that is placed onto the board that is not a part of the terrain
+    //Used primarily for identification and data
+    class Token : IEquatable<Token>
     {
+
+        //Default token constructor
         public Token()
         {
             mNameString = "DefName";
@@ -13,6 +17,7 @@ namespace Ancient_Wars_v1._0
             mTokenID = new TokenId();
         }
 
+        //Constructor when given a name and icon
         public Token(string nameArg, char iconArg)
         {
             mNameString = nameArg;
@@ -20,6 +25,56 @@ namespace Ancient_Wars_v1._0
             mTokenID = new TokenId();
         }
 
+        public virtual string[] ActionList()
+        {
+            string[] lList = { "0 - Base Token, Continue" };
+            return lList;
+        }
+
+        //Returns a token's ID
+        public string GetID()
+        {
+            return mTokenID.IDString;
+        }
+
+        public override bool Equals(object Arg)
+        {
+            try
+            {
+                Token lToken = (Token)Arg;
+                if (this.TokenID.IDNumber == lToken.TokenID.IDNumber)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Equals(Token other)
+        {
+            return other != null &&
+                   EqualityComparer<TokenId>.Default.Equals(TokenID, other.TokenID);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(TokenID);
+        }
+
+        /// <summary>
+        /// ==============
+        /// Properties
+        /// ==============
+        /// </summary>
+
+        //Name of the token
         private string mNameString;
 
         public string Name
@@ -28,7 +83,7 @@ namespace Ancient_Wars_v1._0
             private set { mNameString = value; }
         }
 
-
+        //symbol to represent the token on the board
         private char mIconChar;
         public char Icon
         {
@@ -36,16 +91,18 @@ namespace Ancient_Wars_v1._0
              set { mIconChar = value; }
         }
 
+        //Token's ID
         private TokenId mTokenID;
-
         public TokenId TokenID
         {
             get { return mTokenID; }
             set { mTokenID = value; }
         }
 
+        //Class defines the method for definining a token's ID
         public class TokenId
         {
+            //Counter to serialize the ID Number of all tokens. 
             private static int counterID = 0;
             
             public TokenId()
@@ -53,7 +110,7 @@ namespace Ancient_Wars_v1._0
                 mIDNumberInt = counterID;
                 counterID++;
                 IDChar = 'N';
-                IDstring = IDChar + mIDNumberInt.ToString();
+                mIDStringVar = IDChar + mIDNumberInt.ToString();
             }
 
             public TokenId(char charArg)
@@ -61,19 +118,16 @@ namespace Ancient_Wars_v1._0
                 mIDNumberInt = counterID;
                 counterID++;
                 IDChar = charArg;
-                IDstring = IDChar + mIDNumberInt.ToString();
+                mIDStringVar = IDChar + mIDNumberInt.ToString();
             }
 
-            public string IDstring
+
+            private string mIDStringVar;
+
+            public string IDString
             {
-                get
-                {
-                    return IDstring;
-                }
-                set
-                {
-                    IDstring = value;
-                }
+                get { return mIDStringVar; }
+                set { mIDStringVar = value; }
             }
 
             private char mIDChar;
