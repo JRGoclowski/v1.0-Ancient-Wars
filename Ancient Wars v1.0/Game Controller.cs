@@ -25,7 +25,7 @@ namespace Ancient_Wars_v1._0
         //Sets up test game 
         public Game_Controller()
         {
-            mBoardOfPlay = new Board(6,10);
+            mBoardOfPlay = new Board(0,10, 0, 6);
             mRoundCount = 0;
             for (int i = 0; i < 2; i++)
             {

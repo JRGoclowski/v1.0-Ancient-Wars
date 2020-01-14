@@ -160,7 +160,7 @@ namespace Ancient_Wars_v1._0
                 {
                     Token lToken = contArg.GetBoard().GetBoardPieceAt(iCoord).Token;
                     Console.WriteLine(
-                        i.ToString() + " - (" + iCoord.RowCoordinate + ", " + iCoord.ColCoordinate + ") : " 
+                        i.ToString() + " - (" + iCoord.XCoordinate + ", " + iCoord.YCoordinate + ") : " 
                         + lToken.Name + " ID: " + lToken.TokenID.IDString 
                         );
                     i++;

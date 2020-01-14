@@ -7,12 +7,50 @@ namespace Ancient_Wars_v1._0
     ///https://gigi.nullneuron.net/gigilabs/a-pathfinding-example-in-c/
     class BoardNode
     {
-        public BoardNode()
+        public BoardNode(SpaceCoordinate coordArg, bool walkArg, bool aimBool)
         {
+            mSpaceCoordinate = coordArg;
+            isWalkable = walkArg;
+            isAimable = aimBool;
             mGCostInt = 0;
             mHCostInt = 0;
             mFCostInt = 0;
         }
+
+        public static List<BoardNode> IdentifyNeighbors(NodeGrid gridArg, SpaceCoordinate coordArg)
+        {
+
+            List<BoardNode> lNeighbors = new List<BoardNode>();
+            foreach (SpaceMovement iMove in SpaceMovement.BASIC_DIRECTIONS)
+            {
+                SpaceCoordinate possNeighborCoord = coordArg.CoordAtMove(iMove);
+                foreach (BoardNode iNode in gridArg)
+                {
+                    if (iNode.Equals(possNeighborCoord))
+                    {
+                        lNeighbors.Add(iNode);
+                    }
+                }
+            }
+            return lNeighbors;
+        }
+
+        private BoardNode[] mNeigherborList;
+
+        public BoardNode[] Neighbors
+        {
+            get { return mNeigherborList; }
+            set { mNeigherborList = value; }
+        }
+
+        private SpaceCoordinate mSpaceCoordinate;
+
+        public SpaceCoordinate Coordinates
+        {
+            get { return mSpaceCoordinate; }
+            private set { mSpaceCoordinate = value; }
+        }
+
 
         private int mGCostInt;
 
@@ -36,6 +74,43 @@ namespace Ancient_Wars_v1._0
         {
             get { return mFCostInt; }
             set { mFCostInt = value; }
+        }
+
+        public bool mWalkableBool;
+
+        public bool isWalkable
+        {
+            get
+            {
+                return mWalkableBool;
+            }
+            set
+            {
+                mWalkableBool = value;
+            }
+
+        }
+
+        public bool mAimThroughBool;
+
+        public bool isAimable
+        {
+            get
+            {
+                return mAimThroughBool;
+            }
+            set
+            {
+                mAimThroughBool = value;
+            }
+
+        }
+
+        public bool Equals(SpaceCoordinate other)
+        {
+            return other != null &&
+                this.Coordinates.XCoordinate == other.XCoordinate &&
+                this.Coordinates.YCoordinate == other.YCoordinate;
         }
 
         /*

@@ -6,7 +6,7 @@ namespace Ancient_Wars_v1._0
 {
     //This class discribes all forms of movement through space on a fundamental level
     //Functions for means of both movement pathfinding, as well as target aiming
-    class SpaceMovement
+    public class SpaceMovement
     {
         //Instantiate a movement to 0 vals for default constructor
         public SpaceMovement()
@@ -65,7 +65,7 @@ namespace Ancient_Wars_v1._0
         //Amount of movement for a row; -1 for up, 1 for down 
         private int mRowMovementInt;
 
-        public int RowMovement
+        public int XMovement
         {
             get { return mRowMovementInt; }
             set { mRowMovementInt = value; }
@@ -74,7 +74,7 @@ namespace Ancient_Wars_v1._0
         //Amount of movement for a col; -1 for left, 1 for right
         private int mColMovementInt;
 
-        public int ColMovement
+        public int YMovement
         {
             get { return mColMovementInt; }
             set { mColMovementInt = value; }
@@ -92,8 +92,8 @@ namespace Ancient_Wars_v1._0
         //Allows for the addition of two directions to calculate movement
         public static SpaceMovement operator +(SpaceMovement thisArg, SpaceMovement moveArg)
         {
-            int newRowMove = thisArg.RowMovement + moveArg.RowMovement;
-            int newColMove = thisArg.ColMovement + moveArg.ColMovement;
+            int newRowMove = thisArg.XMovement + moveArg.XMovement;
+            int newColMove = thisArg.YMovement + moveArg.YMovement;
             int newCost = thisArg.MovementCost + moveArg.MovementCost;
             SpaceMovement lMove = new SpaceMovement(newRowMove, newColMove, newCost);
             return lMove;

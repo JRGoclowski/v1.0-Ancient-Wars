@@ -12,39 +12,39 @@ namespace Ancient_Wars_v1._0
         public SpaceCoordinate()
         {
 
-            mRowCoordinateInt = 0;
+            mXCoordinateInt = 0;
 
-            mColCoordinateInt = 0;
-
-        }
-
-        public SpaceCoordinate(int rowArg, int colArg)
-        {
-
-            mRowCoordinateInt = rowArg;
-
-            mColCoordinateInt = colArg;
+            mYCoordinateInt = 0;
 
         }
 
-        private int mRowCoordinateInt;
-        public int RowCoordinate
+        public SpaceCoordinate(int xArg, int yArg)
         {
-            get { return mRowCoordinateInt; }
-            private set { mRowCoordinateInt = value; }
+
+            mXCoordinateInt = xArg;
+
+            mYCoordinateInt = yArg;
+
         }
 
-        private int mColCoordinateInt;
-        public int ColCoordinate
+        private int mXCoordinateInt;
+        public int XCoordinate
         {
-            get { return mColCoordinateInt; }
-            private set { mColCoordinateInt = value; }
+            get { return mXCoordinateInt; }
+            private set { mXCoordinateInt = value; }
+        }
+
+        private int mYCoordinateInt;
+        public int YCoordinate
+        {
+            get { return mYCoordinateInt; }
+            private set { mYCoordinateInt = value; }
         }
 
         //Converts a string input into a coordinate combinations; return null on failed parse
         public static SpaceCoordinate ParseCoordinate(string parseArg)
         {
-            int lRowCoord, lColCoord;
+            int lXCoord, lYCoord;
             //Define regex for digits
             Regex digitRegex = new Regex("[^0-9]");
             //split string at a comma
@@ -54,7 +54,7 @@ namespace Ancient_Wars_v1._0
             try
             {
                 string firstCoord = digitRegex.Replace(inputCoords[0], "");
-                lRowCoord = Convert.ToInt32(firstCoord);
+                lXCoord = Convert.ToInt32(firstCoord);
             }
             catch
             {
@@ -64,7 +64,7 @@ namespace Ancient_Wars_v1._0
             try
             {
                 string secondCoord = digitRegex.Replace(inputCoords[1], "");
-                lColCoord = Convert.ToInt32(secondCoord);
+                lYCoord = Convert.ToInt32(secondCoord);
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace Ancient_Wars_v1._0
             try
             {
                 //Generate and return the coordinate
-                SpaceCoordinate returnVal = new SpaceCoordinate(lRowCoord, lColCoord);
+                SpaceCoordinate returnVal = new SpaceCoordinate(lXCoord, lYCoord);
                 return returnVal;
             }
             catch
@@ -82,16 +82,24 @@ namespace Ancient_Wars_v1._0
             }
         }
 
+        public SpaceCoordinate CoordAtMove(SpaceMovement moveArg)
+        {
+            int newX = this.mXCoordinateInt + moveArg.XMovement;
+            int newY = this.mYCoordinateInt + moveArg.YMovement;
+            SpaceCoordinate lCoord = new SpaceCoordinate(newX, newY);
+            return lCoord;
+        }
+
         public bool Equals(SpaceCoordinate other)
         {
             return other != null &&
-                   RowCoordinate == other.RowCoordinate &&
-                   ColCoordinate == other.ColCoordinate;
+                   XCoordinate == other.XCoordinate &&
+                   YCoordinate == other.YCoordinate;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(RowCoordinate, ColCoordinate);
+            return HashCode.Combine(XCoordinate, YCoordinate);
         }
     }
 }

@@ -24,7 +24,33 @@ namespace Ancient_Wars_v1._0
         {
             StringBuilder boardBuilder = new StringBuilder();
 
-            for (int i = 0; i < mBoardVar.Dimensions[0] + 1; i++)
+            for (int i = mBoardVar.NodeGrid.YBounds[1] - 1; i >= mBoardVar.NodeGrid.YBounds[0]; i--)
+            {
+                boardBuilder.Append(i.ToString());
+                
+                
+                for (int j = mBoardVar.NodeGrid.XBounds[1] - 1; j >= mBoardVar.NodeGrid.XBounds[0]; j--)
+                {
+                    SpaceCoordinate lCoord = new SpaceCoordinate(j, i);
+                    boardBuilder.Append(mBoardVar.BoardSpaces.Find( x => x.Node.Coordinates.Equals(lCoord)).Icon);
+                }
+                boardBuilder.Append("\r\n");
+                if (i == mBoardVar.NodeGrid.YBounds[0] + 1)
+                {
+                    boardBuilder.Append(" ");
+                    for (int k = mBoardVar.NodeGrid.XBounds[0]; k < mBoardVar.NodeGrid.XBounds[1]; k++) 
+                    {
+                        boardBuilder.Append(k.ToString());
+                    }
+                }
+            }
+            return boardBuilder.ToString();
+        }
+    }
+}
+
+/*
+ * for (int i = 0; i < mBoardVar.Dimensions[0] + 1; i++)
             {
                 for (int j = 0; j < mBoardVar.Dimensions[1] + 1; j++)
                 {
@@ -54,6 +80,6 @@ namespace Ancient_Wars_v1._0
                 boardBuilder.Append("\r\n");
             }
             return boardBuilder.ToString();
-        }
-    }
-}
+ * 
+ * 
+ */
