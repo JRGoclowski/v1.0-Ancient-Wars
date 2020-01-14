@@ -22,8 +22,8 @@ namespace Ancient_Wars_v1._0
             //set loop bolean true
             bool gameContinue = true;
             //Place two starting units
-            SpaceCoordinate coordOne = new SpaceCoordinate(2, 4);
-            SpaceCoordinate coordTwo = new SpaceCoordinate(3, 5);
+            SpaceCoordinate coordOne = new SpaceCoordinate(4, 2);
+            SpaceCoordinate coordTwo = new SpaceCoordinate(5, 3);
             main_Controller.PlaceUnit(Unit.GetBasicUnit(1), coordOne);
             main_Controller.PlaceUnit(Unit.GetBasicUnit(0), coordTwo);
             
@@ -116,7 +116,7 @@ namespace Ancient_Wars_v1._0
             //loop to select board space
             while (!spaceSelected)
             {
-                Console.Write("Enter Coordinates [Row, Column]: ");
+                Console.Write("Enter Coordinates [X, Y]: ");
                 userCoords = Console.ReadLine();
                 lSpaceCoordinate = SpaceCoordinate.ParseCoordinate(userCoords);
                 if (lSpaceCoordinate != null)

@@ -222,7 +222,6 @@ namespace Ancient_Wars_v1._0
 
         private BoardSpace GetBoardSpace(SpaceCoordinate coordArg)
         {
-            Console.WriteLine();
             var testVal = this.BoardSpaces.Find(x => x.Node.Coordinates.Equals(coordArg));
             return testVal;
         }
@@ -248,12 +247,12 @@ namespace Ancient_Wars_v1._0
 
         public static bool withinBounds(Board boardArg, SpaceCoordinate coordArg)
         {
-            bool xInBounds = false, yInBounds = false;            
-            if (coordArg.XCoordinate > boardArg.NodeGrid.XBounds[0] && coordArg.XCoordinate < boardArg.NodeGrid.XBounds[1])
+            bool xInBounds = false, yInBounds = false;
+            if (coordArg.XCoordinate >= boardArg.NodeGrid.XBounds[0] && coordArg.XCoordinate < boardArg.NodeGrid.XBounds[1])
             {
                 xInBounds = true;
             }
-            if (coordArg.YCoordinate > boardArg.NodeGrid.YBounds[0] && coordArg.YCoordinate < boardArg.NodeGrid.YBounds[1])
+            if (coordArg.YCoordinate >= boardArg.NodeGrid.YBounds[0] && coordArg.YCoordinate < boardArg.NodeGrid.YBounds[1])
             {
                 yInBounds = true;
             }
