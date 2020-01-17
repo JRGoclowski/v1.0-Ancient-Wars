@@ -18,12 +18,14 @@ namespace Ancient_Wars_v1._0
         }
 
         //Instantiate a unit specifying all values
-        public Unit(string nameArg, int speedArg, int healthArg, int attackArg, char iconArg): base(nameArg, iconArg)
+        public Unit(string nameArg, char teamCharArg, int speedArg, int healthArg, int attackArg, int rangeArg, char iconArg): base(nameArg, iconArg, teamCharArg)
         {
             mBaseSpeed = speedArg;
             mBaseHealth = healthArg;
-            mBaseAttack = attackArg;            
+            mBaseAttack = attackArg;
+            mBaseRange = rangeArg;
             SetToBaseValues();
+            mAliveBool = true;
         }
 
         //Sets all current values to the instantiated values
@@ -37,14 +39,15 @@ namespace Ancient_Wars_v1._0
         //This method returns a very basic version of a unit
         public static Unit GetBasicUnit(int intArg)
         {
-            Unit lUnit = All_BASIC_UNITS[intArg];
+            Unit lBaseUnit= All_BASIC_UNITS[intArg];
+            Unit lUnit = new Unit(lBaseUnit.Name, lBaseUnit.TokenID.IDChar, lBaseUnit.MoveSpeed, lBaseUnit.UnitHealth, lBaseUnit.Attack, lBaseUnit.AttackRange, lBaseUnit.Icon);
             return lUnit;
         }
 
         //Defines the basic units
-        private readonly static Unit BASIC_MAGE = new Unit("Mage", 4, 5, 2, 'M');
-        private readonly static Unit BASIC_SOLDIER = new Unit("Soldier", 3, 4, 3, 'S');
-        private readonly static Unit BASIC_RANGER = new Unit("Ranger", 2, 2, 4, 'R');
+        private readonly static Unit BASIC_MAGE = new Unit("Mage", 'N',4, 5, 2, 3, 'M');
+        private readonly static Unit BASIC_SOLDIER = new Unit("Soldier", 'A',3, 4, 3, 1, 'S');
+        private readonly static Unit BASIC_RANGER = new Unit("Ranger", 'P', 2, 2, 4, 4,'R');
 
         public readonly static Unit[] All_BASIC_UNITS = 
         {
@@ -57,21 +60,7 @@ namespace Ancient_Wars_v1._0
 
         //Override ActionList from token
 
-        public override string[] ActionList()
-        {
-            string[] lList =
-            {
-                "0 - List Unit Data; N/I",
-                "1 - Show Possible Unit Moves; N/I",
-                "2 - Show Possible Unit Targets; N/I",
-                "3 - Move Unit; N/I",
-                "4 - Attack Another Unit; N/I"
-            };
-            return lList;
-        }
-
-
-
+        
         //Decrease this unit's health by a given integer
         public int TakeDamage(int damageTaken)
         {
@@ -91,6 +80,18 @@ namespace Ancient_Wars_v1._0
             return true;
         }
 
+        public string GetUnitInfo()
+        {
+            StringBuilder infoBuilder = new StringBuilder();
+            infoBuilder.Append(this.Name + " (" + this.Icon + ") ID:" + this.TokenID + "\r\n");
+            infoBuilder.Append("[Current]/[Max]/[Base]" + "\r\n");
+            infoBuilder.Append("Move Speed:" + this.MoveSpeed + "/" + "[N/A]" + "/" + this.mBaseSpeed + "\r\n");
+            infoBuilder.Append("Health:" + this.UnitHealth + "/" + this.mMaxHealth + "/" + this.mBaseHealth + "\r\n");
+            infoBuilder.Append("Attack:" + this.Attack + "/" + "[N/A]" + "/" + this.mBaseAttack + "\r\n");
+
+            return infoBuilder.ToString();
+        }
+
         /// <summary>
         /// ==============
         /// Properties
@@ -99,6 +100,7 @@ namespace Ancient_Wars_v1._0
         private int mBaseHealth;
         private int mBaseSpeed;
         private int mBaseAttack;
+        private int mBaseRange;
         private int mMaxHealth;
         private int mMoveSpeedInt;
 
@@ -123,6 +125,15 @@ namespace Ancient_Wars_v1._0
             get { return mCurrentAttackInt; }
             set { mCurrentAttackInt = value; }
         }
+
+        private int mCurrentAttackRange;
+
+        public int AttackRange
+        {
+            get { return mCurrentAttackRange; }
+            set { mCurrentAttackRange = value; }
+        }
+
 
         private bool mAliveBool;
 

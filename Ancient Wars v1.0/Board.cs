@@ -199,6 +199,19 @@ namespace Ancient_Wars_v1._0
             return GetBoardSpace(coordArg).PieceAt;
         }
 
+        public BoardSpace GetBoardSpaceOfToken(Token tokenArg)
+        {
+            List<SpaceCoordinate> occCoords = GetOccupiedCoordsFromBoard();
+            foreach(SpaceCoordinate iCoord in occCoords)
+            {
+                if (tokenArg.TokenID == GetBoardPieceAt(iCoord).Token.TokenID)
+                {
+                    return GetBoardSpace(iCoord);
+                }
+            }
+            return null;
+        }
+
         public void SetBoardPieceAt(BoardPiece pieceArg, SpaceCoordinate coordArg)
         {
             GetBoardSpace(coordArg).SetNewPieceValue(pieceArg);
@@ -261,7 +274,7 @@ namespace Ancient_Wars_v1._0
 
         public bool SpaceWalkable(SpaceCoordinate coordArg)
         {
-            return GetBoardSpace(coordArg).Node.isWalkable;
+            return GetBoardSpace(coordArg).Node.IsWalkable;
         }
     }
 }

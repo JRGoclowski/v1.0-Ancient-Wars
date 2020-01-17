@@ -101,5 +101,10 @@ namespace Ancient_Wars_v1._0
         {
             return HashCode.Combine(XCoordinate, YCoordinate);
         }
+
+        public override string ToString()
+        {
+            return "(" + XCoordinate + "," + YCoordinate + ")";
+        }
     }
 }

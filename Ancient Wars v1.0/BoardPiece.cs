@@ -12,6 +12,7 @@ namespace Ancient_Wars_v1._0
         {
             mToken = tokenArg;
             mBoardIcon = mToken.Icon;
+            mTargetableBool = true;
         }
 
         private Token mToken;
@@ -29,6 +30,15 @@ namespace Ancient_Wars_v1._0
             get { return mToken; }
             set { mToken = value; }
         }
+
+        private bool mTargetableBool;
+
+        public bool Targetable
+        {
+            get { return mTargetableBool; }
+            set { mTargetableBool = value; }
+        }
+
 
         private bool mCreatureBool;
 

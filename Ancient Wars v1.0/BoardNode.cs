@@ -10,8 +10,8 @@ namespace Ancient_Wars_v1._0
         public BoardNode(SpaceCoordinate coordArg, bool walkArg, bool aimBool)
         {
             mSpaceCoordinate = coordArg;
-            isWalkable = walkArg;
-            isAimable = aimBool;
+            IsWalkable = walkArg;
+            IsAimable = aimBool;
             mGCostInt = 0;
             mHCostInt = 0;
             mFCostInt = 0;
@@ -21,7 +21,7 @@ namespace Ancient_Wars_v1._0
         {
 
             List<BoardNode> lNeighbors = new List<BoardNode>();
-            foreach (SpaceMovement iMove in SpaceMovement.BASIC_DIRECTIONS)
+            foreach (SpaceMovement iMove in gridArg.BASIC_DIRECTIONS)
             {
                 SpaceCoordinate possNeighborCoord = coordArg.CoordAtMove(iMove);
                 foreach (BoardNode iNode in gridArg)
@@ -34,6 +34,8 @@ namespace Ancient_Wars_v1._0
             }
             return lNeighbors;
         }
+
+        
 
         private BoardNode[] mNeigherborList;
 
@@ -78,7 +80,7 @@ namespace Ancient_Wars_v1._0
 
         public bool mWalkableBool;
 
-        public bool isWalkable
+        public bool IsWalkable
         {
             get
             {
@@ -93,7 +95,7 @@ namespace Ancient_Wars_v1._0
 
         public bool mAimThroughBool;
 
-        public bool isAimable
+        public bool IsAimable
         {
             get
             {

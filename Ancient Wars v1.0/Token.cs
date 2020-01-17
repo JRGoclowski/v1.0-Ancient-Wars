@@ -25,11 +25,13 @@ namespace Ancient_Wars_v1._0
             mTokenID = new TokenId();
         }
 
-        public virtual string[] ActionList()
+        public Token(string nameArg, char iconArg, char teamArg)
         {
-            string[] lList = { "0 - Base Token, Continue" };
-            return lList;
+            mNameString = nameArg;
+            mIconChar = iconArg;
+            mTokenID = new TokenId(teamArg);
         }
+               
 
         //Returns a token's ID
         public string GetID()

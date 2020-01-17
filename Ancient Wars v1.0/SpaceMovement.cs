@@ -24,38 +24,7 @@ namespace Ancient_Wars_v1._0
             mColMovementInt = colArg;
             mMovementCostInt = costArg;
         }
-        //Cardinal Directions; Set in clockwise rotation
-        public static readonly SpaceMovement[] BASIC_DIRECTIONS = 
-            {
-            DIR_UP,
-            DIR_RIGHT,
-            DIR_DOWN,
-            DIR_LEFT
-            };
-        //All directions adjacent from a single space; Set in clockwise Rotation
-        public static readonly SpaceMovement[] ALL_DIRECTIONS = 
-            {
-            DIR_UP, 
-            DIR_UP_RIGHT,
-            DIR_RIGHT,
-            DIR_DOWN_RIGHT,
-            DIR_DOWN,
-            DIR_DOWN_LEFT,
-            DIR_LEFT,
-            DIR_UP_LEFT
-            };
-
-        //Definitions of each direction
-        private static readonly SpaceMovement DIR_UP = new SpaceMovement(-1, 0, 1) ;
-        private static readonly SpaceMovement DIR_DOWN = new SpaceMovement(1, 0, 1);
-        private static readonly SpaceMovement DIR_RIGHT = new SpaceMovement(0, 1 , 1);
-        private static readonly SpaceMovement DIR_LEFT = new SpaceMovement(0, -1 ,1);
-        private static readonly SpaceMovement DIR_UP_RIGHT = DIR_UP + DIR_RIGHT;
-        private static readonly SpaceMovement DIR_UP_LEFT = DIR_UP + DIR_LEFT;
-        private static readonly SpaceMovement DIR_DOWN_RIGHT = DIR_DOWN + DIR_RIGHT;
-        private static readonly SpaceMovement DIR_DOWN_LEFT = DIR_DOWN + DIR_LEFT;
         
-
         /// <summary>
         /// ==============
         /// Properties

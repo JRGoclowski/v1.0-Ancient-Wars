@@ -26,7 +26,50 @@ namespace Ancient_Wars_v1._0
             mYBounds = new int[2];
             mYBounds[0] = minYCoordArg;
             mYBounds[1] = maxYCoordArg;
+
+            SpaceMovement DIR_UP = new SpaceMovement(-1, 0, 10);
+            SpaceMovement DIR_DOWN = new SpaceMovement(1, 0, 10);
+            SpaceMovement DIR_RIGHT = new SpaceMovement(0, 1, 10);
+            SpaceMovement DIR_LEFT = new SpaceMovement(0, -1, 10);
+            SpaceMovement DIR_UP_RIGHT = new SpaceMovement(1, 1, 14);
+            SpaceMovement DIR_UP_LEFT = new SpaceMovement(1, -1, 14);
+            SpaceMovement DIR_DOWN_RIGHT = new SpaceMovement(-1, 1, 14);
+            SpaceMovement DIR_DOWN_LEFT = new SpaceMovement(-1, -1, 14);
+
+            mBaseDir = new List<SpaceMovement>();
+            mAllDir = new List<SpaceMovement>();
+
+            mBaseDir.Add(DIR_UP);
+            mBaseDir.Add(DIR_RIGHT);
+            mBaseDir.Add(DIR_DOWN);
+            mBaseDir.Add(DIR_LEFT);
+
+            mAllDir.Add(DIR_UP);
+            mAllDir.Add(DIR_UP_RIGHT);
+            mAllDir.Add(DIR_RIGHT);
+            mAllDir.Add(DIR_DOWN_RIGHT);
+            mAllDir.Add(DIR_DOWN);
+            mAllDir.Add(DIR_DOWN_LEFT);
+            mAllDir.Add(DIR_LEFT);
+            mAllDir.Add(DIR_UP_LEFT);
         }
+
+        private List<SpaceMovement> mBaseDir;
+
+        public List<SpaceMovement> BASIC_DIRECTIONS
+        {
+            get { return mBaseDir; }
+            set { mBaseDir = value; }
+        }
+
+        private List<SpaceMovement> mAllDir;
+
+        public List<SpaceMovement> ALL_DIRECTIONS
+        {
+            get { return mAllDir; }
+            set { mAllDir = value; }
+        }
+
 
         public BoardNode GetNodeAt(SpaceCoordinate coordArg)
         {
@@ -37,6 +80,9 @@ namespace Ancient_Wars_v1._0
         {
             return ((IEnumerable)BoardNodes).GetEnumerator();
         }
+        
+
+        //Definitions of each direction
 
         private int[] mXBounds;
 
