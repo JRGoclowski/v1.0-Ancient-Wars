@@ -21,15 +21,13 @@ namespace Ancient_Wars_v1._0
         {
 
             List<BoardNode> lNeighbors = new List<BoardNode>();
-            foreach (SpaceMovement iMove in gridArg.BASIC_DIRECTIONS)
+            foreach (SpaceMovement iMove in gridArg.ALL_DIRECTIONS)
             {
                 SpaceCoordinate possNeighborCoord = coordArg.CoordAtMove(iMove);
-                foreach (BoardNode iNode in gridArg)
+                BoardNode lNode = gridArg.BoardNodes.Find(x => x.Coordinates.Equals(coordArg));
+                if (lNode != null)
                 {
-                    if (iNode.Equals(possNeighborCoord))
-                    {
-                        lNeighbors.Add(iNode);
-                    }
+                    lNeighbors.Add(lNode);
                 }
             }
             return lNeighbors;
@@ -37,9 +35,9 @@ namespace Ancient_Wars_v1._0
 
         
 
-        private BoardNode[] mNeigherborList;
+        private List<BoardNode> mNeigherborList;
 
-        public BoardNode[] Neighbors
+        public List<BoardNode> Neighbors
         {
             get { return mNeigherborList; }
             set { mNeigherborList = value; }

@@ -52,6 +52,11 @@ namespace Ancient_Wars_v1._0
             mAllDir.Add(DIR_DOWN_LEFT);
             mAllDir.Add(DIR_LEFT);
             mAllDir.Add(DIR_UP_LEFT);
+
+            foreach (BoardNode iNode in this.BoardNodes)
+            {
+                iNode.Neighbors = BoardNode.IdentifyNeighbors(this, iNode.Coordinates);
+            }
         }
 
         private List<SpaceMovement> mBaseDir;
