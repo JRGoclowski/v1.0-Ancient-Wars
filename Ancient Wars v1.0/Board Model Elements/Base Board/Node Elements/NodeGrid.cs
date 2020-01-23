@@ -3,10 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// This class is the collection of nodes that will serves as the foundation that the board is built on
+/// </summary>
 namespace Ancient_Wars_v1._0
 {
     class NodeGrid : IEnumerable
     {
+        /**
+         * Constructor - Instantiate a grid given the bounds to be used, allows for negative bounds
+         * Though this isn't really used so may be unnecessary. 
+         * Note - As this version is not prepared for delivery, it only insantiates a rectangular board in which 
+         * all nodes are walkable and targetable
+         */
         public NodeGrid(int minXCoordArg, int maxXCoordArg, int minYCoordArg, int maxYCoordArg)
         {
             mBoardNodes = new List<BoardNode>();
@@ -27,6 +36,8 @@ namespace Ancient_Wars_v1._0
             mYBounds[0] = minYCoordArg;
             mYBounds[1] = maxYCoordArg;
 
+            //Instantiate all directions on the node grid, there may be a better place to put these
+            //but this allowed me to begin testing other features
             SpaceMovement DIR_UP = new SpaceMovement(-1, 0, 10);
             SpaceMovement DIR_DOWN = new SpaceMovement(1, 0, 10);
             SpaceMovement DIR_RIGHT = new SpaceMovement(0, 1, 10);
@@ -36,14 +47,17 @@ namespace Ancient_Wars_v1._0
             SpaceMovement DIR_DOWN_RIGHT = new SpaceMovement(-1, 1, 14);
             SpaceMovement DIR_DOWN_LEFT = new SpaceMovement(-1, -1, 14);
 
+            //Two lists for containing all directions
             mBaseDir = new List<SpaceMovement>();
             mAllDir = new List<SpaceMovement>();
 
+            //Add the cardinal directions to the base direction list, in clockwise order
             mBaseDir.Add(DIR_UP);
             mBaseDir.Add(DIR_RIGHT);
             mBaseDir.Add(DIR_DOWN);
             mBaseDir.Add(DIR_LEFT);
 
+            //Add all 8 directions to the all direction list, in clockwise order
             mAllDir.Add(DIR_UP);
             mAllDir.Add(DIR_UP_RIGHT);
             mAllDir.Add(DIR_RIGHT);
@@ -53,6 +67,7 @@ namespace Ancient_Wars_v1._0
             mAllDir.Add(DIR_LEFT);
             mAllDir.Add(DIR_UP_LEFT);
 
+            //Instatiate each node's neighbor list
             foreach (BoardNode iNode in this.BoardNodes)
             {
                 iNode.Neighbors = BoardNode.IdentifyNeighbors(this, iNode.Coordinates);

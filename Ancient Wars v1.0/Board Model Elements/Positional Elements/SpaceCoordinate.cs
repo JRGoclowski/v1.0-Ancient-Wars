@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Ancient_Wars_v1._0
 {
-    //Represents any area in space
+    //Represents any area in space, used for any positional functions
     public class SpaceCoordinate : IEquatable<SpaceCoordinate>
     {
         //Constructors, Default and with coordinates
@@ -82,6 +82,7 @@ namespace Ancient_Wars_v1._0
             }
         }
 
+        //returns coordinate at a space movement from this
         public SpaceCoordinate CoordAtMove(SpaceMovement moveArg)
         {
             int newX = this.mXCoordinateInt + moveArg.XMovement;
@@ -90,6 +91,7 @@ namespace Ancient_Wars_v1._0
             return lCoord;
         }
 
+    
         public bool Equals(SpaceCoordinate other)
         {
             return other != null &&

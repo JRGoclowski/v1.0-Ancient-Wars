@@ -1,22 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+/*
+ * This class serves as a base element for pathfinding and movement. Nodes are required for the
+ * A* pathfinding algorithm, and this class contains the relevant member variables
+ */
 namespace Ancient_Wars_v1._0
 {
+    //This is a link the a website that explains the A* pathfinding algorithm
     ///https://gigi.nullneuron.net/gigilabs/a-pathfinding-example-in-c/
+    ///
+
     class BoardNode
     {
         public BoardNode(SpaceCoordinate coordArg, bool walkArg, bool aimBool)
         {
+            //Coordinates representing position
             mSpaceCoordinate = coordArg;
+
+            //booleans used for pathfinding and targetting enemies
             IsWalkable = walkArg;
             IsAimable = aimBool;
+
+            //FGH costs are the values used to improve pathfinding in A*
             mGCostInt = 0;
             mHCostInt = 0;
             mFCostInt = 0;
+
+            //used to track the last space in a particular path
+            mParentNode = null;
         }
 
+        //Nodes need to know what their neighbors are for pathfinding to be efficient
         public static List<BoardNode> IdentifyNeighbors(NodeGrid gridArg, SpaceCoordinate coordArg)
         {
 
@@ -33,7 +48,15 @@ namespace Ancient_Wars_v1._0
             return lNeighbors;
         }
 
-        
+
+        private BoardNode mParentNode;
+
+        public BoardNode Parent
+        {
+            get { return mParentNode; }
+            set { mParentNode = value; }
+        }
+
 
         private List<BoardNode> mNeigherborList;
 

@@ -55,12 +55,7 @@ namespace Ancient_Wars_v1._0
             BASIC_SOLDIER,
             BASIC_RANGER
         };
-
-        
-
-        //Override ActionList from token
-
-        
+                
         //Decrease this unit's health by a given integer
         public int TakeDamage(int damageTaken)
         {
@@ -80,6 +75,7 @@ namespace Ancient_Wars_v1._0
             return true;
         }
 
+        //Returns a formatted string with a unit's information
         public string GetUnitInfo()
         {
             StringBuilder infoBuilder = new StringBuilder();

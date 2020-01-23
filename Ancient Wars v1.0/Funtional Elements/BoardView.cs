@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ancient_Wars_v1._0
 {
-    //Faciliates Representation of the board in a UI format
+    //Faciliates Representation of the board in a console UI format
     class BoardView
     {
         private Board mBoardVar;
@@ -37,7 +37,6 @@ namespace Ancient_Wars_v1._0
                 rowList.Add(rowBuilder.ToString());
                 rowBuilder.Clear();
             }
-            //REVERSE
             int yAxis = mBoardVar.NodeGrid.YBounds[1] - 1;
             foreach (string iString in rowList)
             {
@@ -60,37 +59,3 @@ namespace Ancient_Wars_v1._0
     }
 }
 
-/*
- * for (int i = 0; i < mBoardVar.Dimensions[0] + 1; i++)
-            {
-                for (int j = 0; j < mBoardVar.Dimensions[1] + 1; j++)
-                {
-                    if (j == 0)
-                    {
-                        if (i == 0)
-                        {
-                            boardBuilder.Append(" ");
-                        }
-                        else
-                        {
-                            boardBuilder.Append(i - 1);
-                        }                        
-                    }
-                    else
-                    {
-                        if (i == 0)
-                        {
-                            boardBuilder.Append(j - 1);
-                        }
-                        else
-                        {
-                            boardBuilder.Append(mBoardVar.GetSpaceIcon((i - 1),(j - 1)));
-                        }
-                    }                    
-                }
-                boardBuilder.Append("\r\n");
-            }
-            return boardBuilder.ToString();
- * 
- * 
- */

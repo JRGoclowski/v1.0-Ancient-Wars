@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+//This class is essentially a duplicate of the base C# IEnumerator class, defining how to enumerate nodes
+//It allows for searching through collections of Nodes, which is crucial for pathfinding
+
 namespace Ancient_Wars_v1._0
 {
     class NodeEnum : IEnumerator

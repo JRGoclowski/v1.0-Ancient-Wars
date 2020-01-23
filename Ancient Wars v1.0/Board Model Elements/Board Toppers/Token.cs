@@ -25,6 +25,7 @@ namespace Ancient_Wars_v1._0
             mTokenID = new TokenId();
         }
 
+        //Constructor with name, icon, and team, which is used in construction of the ID
         public Token(string nameArg, char iconArg, char teamArg)
         {
             mNameString = nameArg;
@@ -39,25 +40,6 @@ namespace Ancient_Wars_v1._0
             return mTokenID.IDString;
         }
 
-        public override bool Equals(object Arg)
-        {
-            try
-            {
-                Token lToken = (Token)Arg;
-                if (this.TokenID.IDNumber == lToken.TokenID.IDNumber)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         public bool Equals(Token other)
         {
@@ -102,6 +84,8 @@ namespace Ancient_Wars_v1._0
         }
 
         //Class defines the method for definining a token's ID
+        //ID is a char and number. Number is unique to each token, char can be 
+        //used to identify if the token belongs to a particular team, or is neutral, etc.
         public class TokenId
         {
             //Counter to serialize the ID Number of all tokens. 

@@ -5,9 +5,10 @@ using System.Text;
 namespace Ancient_Wars_v1._0
 {
     
-    //The actual pieces that sit on a board. Used primarily for manipulation in the board context
+    //Represents any object placed on the board, allows for manipulation of such objects in the board scope
     class BoardPiece
     {
+        //All board pieces are a token of one form or another, a base class for units, objectives, buildings, etc.
         public BoardPiece(Token tokenArg)
         {
             mToken = tokenArg;
@@ -15,6 +16,9 @@ namespace Ancient_Wars_v1._0
             mTargetableBool = true;
         }
 
+        //=========
+        //= Props =
+        //=========
         private Token mToken;
         private char mBoardIcon;
 
@@ -38,24 +42,6 @@ namespace Ancient_Wars_v1._0
             get { return mTargetableBool; }
             set { mTargetableBool = value; }
         }
-
-
-        private bool mCreatureBool;
-
-        public bool hasCreature
-        {
-            get { return mCreatureBool; }
-            set { mCreatureBool = value; }
-        }
-
-        private bool mObjectBool;
-
-        public bool hasObject
-        {
-            get { return mObjectBool; }
-            set { mObjectBool = value; }
-        }
-
     }
 
 }
